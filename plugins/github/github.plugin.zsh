@@ -4,7 +4,7 @@ if [ "$commands[(I)hub]" ] && [ "$commands[(I)ruby]" ]; then
     if declare -f _git > /dev/null; then
       _git
     fi
-    
+
     if declare -f _git_commands > /dev/null; then
         _hub_commands=(
             'alias:show shell instructions for wrapping git'
@@ -17,6 +17,7 @@ if [ "$commands[(I)hub]" ] && [ "$commands[(I)ruby]" ]; then
         # Extend the '_git_commands' function with hub commands
         eval "$(declare -f _git_commands | sed -e 's/base_commands=(/base_commands=(${_hub_commands} /')"
     fi
+
     # eval `hub alias -s zsh`
     function git(){
         if ! (( $+_has_working_hub  )); then
