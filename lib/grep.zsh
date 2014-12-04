@@ -3,7 +3,7 @@
 # Examples: http://rubyurl.com/ZXv
 #
 
-GREP_OPTIONS="--color=auto"
+grep_options="--color=auto"
 
 # avoid VCS folders (if the necessary grep flags are available)
 grep-flag-available() {
@@ -11,14 +11,14 @@ grep-flag-available() {
 }
 if grep-flag-available --exclude-dir=.cvs; then
     for PATTERN in .cvs .git .hg .svn; do
-        GREP_OPTIONS+=" --exclude-dir=$PATTERN"
+        grep_options+=" --exclude-dir=$PATTERN"
     done
 elif grep-flag-available --exclude=.cvs; then
     for PATTERN in .cvs .git .hg .svn; do
-        GREP_OPTIONS+=" --exclude=$PATTERN"
+        grep_options+=" --exclude=$PATTERN"
     done
 fi
 unfunction grep-flag-available
 
-export GREP_OPTIONS="$GREP_OPTIONS"
+alias grep="grep $grep_options"
 export GREP_COLOR='1;32'
