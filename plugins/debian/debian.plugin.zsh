@@ -7,7 +7,7 @@
 
 # Use aptitude if installed, or apt-get if not.
 # You can just set apt_pref='apt-get' to override it.
-if which aptitude &> /dev/null; then
+if [[ -e $( which -p aptitude 2>&1 ) ]]; then
     apt_pref='aptitude'
     apt_upgr='safe-upgrade'
 else
@@ -16,7 +16,7 @@ else
 fi
 
 # Use sudo by default if it's installed
-if which sudo &> /dev/null; then
+if [[ -e $( which -p sudo 2>&1 ) ]]; then
     use_sudo=1
 fi
 
@@ -29,10 +29,8 @@ alias api='aptitude'
 # Some self-explanatory aliases
 alias acs="apt-cache search"
 alias aps='aptitude search'
-
-# search package
 alias as="aptitude -F \"* %p -> %d \n(%v/%V)\" \
-                   --no-gui --disable-columns search"
+		--no-gui --disable-columns search"	# search package
 
 # apt-file
 alias afs='apt-file search --regexp'
